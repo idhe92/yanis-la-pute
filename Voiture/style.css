@@ -1,0 +1,18 @@
+
+body{
+	margin: 0;
+	padding: 0;
+	/* background: url("img/circuit.png");
+	background-repeat: no-repeat;
+	background-size: 100%; */
+}
+
+
+canvas {
+    background-color: gray;
+    z-index: 1;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}

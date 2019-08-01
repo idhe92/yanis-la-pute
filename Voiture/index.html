@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>VOITUUUUUUUUUUUURE</title>
+	<link rel="stylesheet" href="style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body onload="startGame()"> <!--On charge le jeu pendant le chargment de la page -->
+
+<script>
+var MaVoiture;
+
+
+function startGame() {
+    MaVoiture = new component(30, 30, "red", 225, 225); //Width Height Couleur SpawnX SpawnY
+    Zone.start();
+}
+
+var Zone = {
+    canvas : document.createElement("canvas"),
+    start : function() {
+        this.canvas.width = window.innerWidth ;
+        this.canvas.height = window.innerHeight ;
+        console.log(window.innerWidth); console.log(window.innerHeight);
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        //this.frameNo = 0;
+
+
+        this.interval = setInterval(updateGameArea, 5); //La vitesse
+
+
+
+        //Les fonctions pour les touches
+        window.addEventListener('keydown', function (e) {
+            e.preventDefault();
+            Zone.keys = (Zone.keys || []);
+            Zone.keys[e.keyCode] = (e.type == "keydown");
+        })
+
+        window.addEventListener('keyup', function (e) {
+            Zone.keys[e.keyCode] = (e.type == "keydown");
+        })
+    },
+
+
+    //On clear pour pas avoir de trainée 
+    clear : function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
+function component(width, height, color, x, y, type) {
+
+    this.type = type;
+    this.width = width;
+    this.height = height;
+    this.speed = 0;
+    this.angle = 0;
+    this.cote = 0;
+    this.x = Math.round(x);
+    this.y = Math.round(y);    
+    this.limitX = 0;
+    this.limitY = 0;
+
+    //MAJ du jeu 
+    this.update = function() {
+        ctx = Zone.context;
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        ctx.fillStyle = color;
+        ctx.fillRect(this.width / -2, this.height / -2, this.width, this.height); //Rotation pour les 2 premiers
+        ctx.restore();
+
+
+
+
+
+/*		if ((this.x + this.width  > window.innerWidth )||(this.x < 0)) {
+			MaVoiture.speed= 0;
+		}
+		if ((this.y +this.height > window.innerHeight )|| (this.y < 0)) {
+			console.log('le y');
+		}
+
+*/		
+	
+
+	if (this.x <= 0) {
+		this.limitX = 0;
+		this.x = this.limitX;
+	}
+
+	if (this.x >= window.innerWidth - this.width){
+		this.limitX = window.innerWidth -  this.width;
+		this.x = this.limitX;
+		console.log(this.x);
+	}
+
+	if (this.y <= 0) {
+		this.limitY = 0;
+		this.y = this.limitY;
+	}
+
+
+	if (this.y >= window.innerHeight - this.height){
+		this.limitY = window.innerHeight -  this.height;
+		this.y = this.limitY;
+		console.log(this.y);
+	}
+
+
+
+
+
+
+
+
+
+          
+    }
+
+    //La postition de la voiture
+    this.newPos = function() {
+        this.angle += this.cote * Math.PI / 180;   //La rotation
+        this.x += this.speed * Math.sin(this.angle);
+        this.y -= this.speed * Math.cos(this.angle);
+    }
+}
+
+
+function updateGameArea() {
+	Zone.clear();
+    MaVoiture.cote = 0;
+    MaVoiture.speed = 0;
+    if (Zone.keys && Zone.keys[37]) {MaVoiture.cote = -1; }  //GAUCHE
+    if (Zone.keys && Zone.keys[39]) {MaVoiture.cote = 1; }	  //DROITE
+    if (Zone.keys && Zone.keys[38]) {MaVoiture.speed= 1; }	 //HAUT
+    if (Zone.keys && Zone.keys[40]) {MaVoiture.speed= -1; }  //BAS
+    MaVoiture.newPos();
+    MaVoiture.update();
+
+}
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- <canvas id="Voiture" width="480" height="320"></canvas>
+	<script type="text/javascript" src="script.js"></script> -->
+
+
+
+
+
