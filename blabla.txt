@@ -1,0 +1,27 @@
+https://julien-vanelian.com/
+http://marcmonteu.fr/stage2-portfolio#top
+http://findmatthew.com/
+https://codepen.io/rd0916/pen/VzZRvN
+
+
+https://codepen.io/php/pen/GgEvrd
+
+https://codepen.io/harmputman/pen/oHxLt
+
+
+@import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+
+
+https://islemhaddad.wixsite.com/btsportfolio2018/veille-technolo
+
+
+https://codepen.io/itbruno/pen/KwarLp
+https://codepen.io/Mobius1/pen/RjgzoK
+https://codepen.io/savalazic/full/QKwERN/
+
+
+-----------------------
+
+<img src="photo.jpg" id="photo" width="50"  onClick="document.getElementById('photo').style.width='150px';">
